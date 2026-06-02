@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "slug": "monstera-deliciosa",
+    "name": "Monstera Deliciosa",
+    "price": 799,
+    "category": "indoor",
+    "image": "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=400",
+    "description": "Ek beautiful tropical plant jo ghar ko jungle jaisa feel deta hai. Low maintenance aur air purifying.",
+    "inStock": true,
+    "rating": 4.8
+  },
+  {
+    "id": 2,
+    "slug": "snake-plant",
+    "name": "Snake Plant",
+    "price": 449,
+    "category": "indoor",
+    "image": "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=400",
+    "description": "Sabse hardy indoor plant. Kam paani, kam light — perfect for beginners.",
+    "inStock": true,
+    "rating": 4.9
+  },
+  {
+    "id": 3,
+    "slug": "peace-lily",
+    "name": "Peace Lily",
+    "price": 549,
+    "category": "indoor",
+    "image": "https://images.unsplash.com/photo-1593691512429-0a897a3edfdf?w=400",
+    "description": "Sundar white flowers wala plant jo bedroom ke liye perfect hai.",
+    "inStock": true,
+    "rating": 4.7
+  },
+  {
+    "id": 4,
+    "slug": "aloe-vera",
+    "name": "Aloe Vera",
+    "price": 299,
+    "category": "succulent",
+    "image": "https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?w=400",
+    "description": "Natural sunburn remedy! Kitchen ke paas rakhne ke liye best plant.",
+    "inStock": true,
+    "rating": 4.6
+  },
+  {
+    "id": 5,
+    "slug": "rose-plant",
+    "name": "Rose Plant",
+    "price": 399,
+    "category": "outdoor",
+    "image": "https://images.unsplash.com/photo-1559563458-527698bf5295?w=400",
+    "description": "Classic red roses — garden ko khubsurat banao.",
+    "inStock": false,
+    "rating": 4.5
+  },
+  {
+    "id": 6,
+    "slug": "tulsi",
+    "name": "Tulsi (Holy Basil)",
+    "price": 149,
+    "category": "herb",
+    "image": "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=400",
+    "description": "Har ghar ki zaroorat. Medicinal properties ke saath beautiful bhi.",
+    "inStock": true,
+    "rating": 4.9
+  }
+]
