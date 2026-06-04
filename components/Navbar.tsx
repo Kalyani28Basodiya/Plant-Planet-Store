@@ -39,7 +39,7 @@ export default function Navbar() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <Search size={20} color="#4b5563" style={{ cursor: 'pointer' }} />
         <User size={20} color="#4b5563" style={{ cursor: 'pointer' }} />
-        <div style={{ position: 'relative', cursor: 'pointer' }}>
+        <Link href="/cart" style={{ position: 'relative', cursor: 'pointer', display: 'flex' }}>
           <ShoppingCart size={20} color="#4b5563" />
           {totalItems > 0 && (
             <span style={{
@@ -60,7 +60,7 @@ export default function Navbar() {
               {totalItems}
             </span>
           )}
-        </div>
+        </Link>
       </div>
 
     </nav>

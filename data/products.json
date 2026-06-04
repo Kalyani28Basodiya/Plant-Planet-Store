@@ -6,7 +6,7 @@
     "price": 799,
     "category": "indoor",
     "image": "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=400",
-    "description": "Ek beautiful tropical plant jo ghar ko jungle jaisa feel deta hai. Low maintenance aur air purifying.",
+    "description": "A stunning tropical plant that brings a jungle-like feel to your home. Low maintenance and excellent at purifying indoor air.",
     "inStock": true,
     "rating": 4.8
   },
@@ -17,7 +17,7 @@
     "price": 449,
     "category": "indoor",
     "image": "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=400",
-    "description": "Sabse hardy indoor plant. Kam paani, kam light — perfect for beginners.",
+    "description": "The hardiest indoor plant around. Thrives with minimal water and low light — perfect for beginners.",
     "inStock": true,
     "rating": 4.9
   },
@@ -28,7 +28,7 @@
     "price": 549,
     "category": "indoor",
     "image": "https://images.unsplash.com/photo-1593691512429-0a897a3edfdf?w=400",
-    "description": "Sundar white flowers wala plant jo bedroom ke liye perfect hai.",
+    "description": "A graceful plant with beautiful white flowers, perfect for brightening up any bedroom or living space.",
     "inStock": true,
     "rating": 4.7
   },
@@ -39,7 +39,7 @@
     "price": 299,
     "category": "succulent",
     "image": "https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?w=400",
-    "description": "Natural sunburn remedy! Kitchen ke paas rakhne ke liye best plant.",
+    "description": "A natural remedy for sunburns and skin care. The best plant to keep near your kitchen window.",
     "inStock": true,
     "rating": 4.6
   },
@@ -50,7 +50,7 @@
     "price": 399,
     "category": "outdoor",
     "image": "https://images.unsplash.com/photo-1559563458-527698bf5295?w=400",
-    "description": "Classic red roses — garden ko khubsurat banao.",
+    "description": "Classic red roses to make your garden truly beautiful. A timeless addition to any outdoor space.",
     "inStock": false,
     "rating": 4.5
   },
@@ -61,12 +61,8 @@
     "price": 149,
     "category": "herb",
     "image": "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=400",
-    "description": "Har ghar ki zaroorat. Medicinal properties ke saath beautiful bhi.",
+    "description": "A must-have in every home. Known for its powerful medicinal properties while also being a beautiful plant.",
     "inStock": true,
     "rating": 4.9
   }
 ]
-
-
-
-

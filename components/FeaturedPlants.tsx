@@ -5,7 +5,7 @@ import productsData from '@/data/products.json'
 const imageMap: Record<number, string> = {
   1: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=300',
   2: 'https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=300',
-  3: 'https://images.unsplash.com/photo-1616690248284-c3cc80e18c9e?w=300',
+  3: 'https://images.unsplash.com/photo-1598880940942-9b77f8f8b0e3?w=300',
   4: 'https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?w=300',
   5: 'https://images.unsplash.com/photo-1559563458-527698bf5295?w=300',
   6: 'https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=300',
