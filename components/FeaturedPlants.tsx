@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import productsData from '@/data/products.json'
@@ -44,65 +46,70 @@ export default function FeaturedPlants() {
         }}
       >
         {productsData.map((product) => (
-          <div
+          <Link
             key={product.id}
-            style={{
-              width: '200px',
-              flexShrink: 0,
-              backgroundColor: 'white',
-              border: '1px solid #e5e7eb',
-              borderRadius: '12px',
-              overflow: 'hidden',
-            }}
+            href={`/products/${product.slug}`}
+            style={{ textDecoration: 'none', color: 'inherit' }}
           >
-            <Image
-              src={imageMap[product.id]}
-              alt={product.name}
-              width={200}
-              height={200}
-              style={{ objectFit: 'cover', display: 'block', borderRadius: 0 }}
-            />
-            <div style={{ padding: '12px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                <p style={{ fontSize: '14px', fontWeight: '500', color: '#111827', margin: 0 }}>
-                  {product.name}
-                </p>
-                <p style={{ fontSize: '14px', fontWeight: '600', color: '#166534', margin: 0 }}>
-                  ₹{product.price}
-                </p>
-              </div>
-              <p style={{ fontSize: '11px', color: '#6b7280', margin: '0 0 6px' }}>Pot Color</p>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                  {colorDots.map((color) => (
-                    <span
-                      key={color}
-                      style={{
-                        width: '12px',
-                        height: '12px',
-                        borderRadius: '50%',
-                        backgroundColor: color,
-                        display: 'inline-block',
-                      }}
-                    />
-                  ))}
+            <div
+              style={{
+                width: '200px',
+                flexShrink: 0,
+                backgroundColor: 'white',
+                border: '1px solid #e5e7eb',
+                borderRadius: '12px',
+                overflow: 'hidden',
+              }}
+            >
+              <Image
+                src={imageMap[product.id]}
+                alt={product.name}
+                width={200}
+                height={200}
+                style={{ objectFit: 'cover', display: 'block', borderRadius: 0 }}
+              />
+              <div style={{ padding: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                  <p style={{ fontSize: '14px', fontWeight: '500', color: '#111827', margin: 0 }}>
+                    {product.name}
+                  </p>
+                  <p style={{ fontSize: '14px', fontWeight: '600', color: '#166534', margin: 0 }}>
+                    ₹{product.price}
+                  </p>
                 </div>
-                <button
-                  style={{
-                    backgroundColor: '#166534',
-                    color: 'white',
-                    padding: '4px 16px',
-                    borderRadius: '6px',
-                    fontSize: '12px',
-                    border: 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Buy
-                </button>
+                <p style={{ fontSize: '11px', color: '#6b7280', margin: '0 0 6px' }}>Pot Color</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                    {colorDots.map((color) => (
+                      <span
+                        key={color}
+                        style={{
+                          width: '12px',
+                          height: '12px',
+                          borderRadius: '50%',
+                          backgroundColor: color,
+                          display: 'inline-block',
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <button
+                    style={{
+                      backgroundColor: '#166534',
+                      color: 'white',
+                      padding: '4px 16px',
+                      borderRadius: '6px',
+                      fontSize: '12px',
+                      border: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Buy
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
