@@ -1,10 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { ShoppingCart, Search, User } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
+import { useSession, signOut } from 'next-auth/react'
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -15,11 +16,13 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname()
+  const router = useRouter()
   const totalItems = useCartStore(
     (state) => state.items.length
   )
-  const [hovered, setHovered] =
-    useState<string | null>(null)
+  const [hovered, setHovered] = useState<string | null>(null)
+  const { data: session } = useSession()
+  const [showDropdown, setShowDropdown] = useState(false)
 
   const getLinkStyle = (href: string) => ({
     textDecoration: 'none',
@@ -82,8 +85,101 @@ export default function Navbar() {
       }}>
         <Search size={20} color="#4b5563"
           style={{ cursor: 'pointer' }} />
-        <User size={20} color="#4b5563"
-          style={{ cursor: 'pointer' }} />
+
+        <div style={{ position: 'relative' }}>
+          {session ? (
+            <>
+              <div
+                onClick={() => setShowDropdown(!showDropdown)}
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  backgroundColor: '#166534',
+                  color: 'white',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                }}
+              >
+                {session.user?.name?.[0]?.toUpperCase()}
+              </div>
+
+              {showDropdown && (
+                <div style={{
+                  position: 'absolute',
+                  top: '48px',
+                  right: '0',
+                  backgroundColor: 'white',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '8px',
+                  padding: '8px',
+                  minWidth: '160px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                  zIndex: 100,
+                }}>
+                  <div style={{
+                    padding: '8px 12px',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    color: '#111827',
+                    borderBottom: '1px solid #f3f4f6',
+                  }}>
+                    {session.user?.name}
+                  </div>
+                  <div style={{
+                    padding: '4px 12px',
+                    fontSize: '11px',
+                    color: '#6b7280',
+                  }}>
+                    {session.user?.email}
+                  </div>
+                  <Link
+                    href="/profile"
+                    onClick={() => setShowDropdown(false)}
+                    style={{
+                      padding: '8px 12px',
+                      fontSize: '13px',
+                      color: '#4b5563',
+                      display: 'block',
+                      cursor: 'pointer',
+                      marginTop: '4px',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    My Profile
+                  </Link>
+                  <button
+                    onClick={() => signOut({ callbackUrl: '/' })}
+                    style={{
+                      padding: '8px 12px',
+                      fontSize: '13px',
+                      color: '#dc2626',
+                      display: 'block',
+                      cursor: 'pointer',
+                      width: '100%',
+                      textAlign: 'left',
+                      border: 'none',
+                      background: 'none',
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </>
+          ) : (
+            <User
+              size={20}
+              color="#4b5563"
+              style={{ cursor: 'pointer' }}
+              onClick={() => router.push('/login')}
+            />
+          )}
+        </div>
         <Link href="/cart" style={{
           position: 'relative',
           textDecoration: 'none',
