@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { ShoppingCart, Search, User } from 'lucide-react'
+import { ShoppingCart, User } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { useSession, signOut } from 'next-auth/react'
 
@@ -83,8 +83,20 @@ export default function Navbar() {
         alignItems: 'center',
         gap: '20px',
       }}>
-        <Search size={20} color="#4b5563"
-          style={{ cursor: 'pointer' }} />
+        {!session && (
+          <Link href="/login" style={{
+            textDecoration: 'none',
+            fontSize: '14px',
+            color: 'white',
+            backgroundColor: '#166534',
+            padding: '8px 20px',
+            borderRadius: '8px',
+            fontWeight: '500',
+            cursor: 'pointer',
+          }}>
+            Login
+          </Link>
+        )}
 
         <div style={{ position: 'relative' }}>
           {session ? (
