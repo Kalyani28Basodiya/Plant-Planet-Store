@@ -24,7 +24,7 @@ export default function LoginPage() {
     })
 
     if (result?.error) {
-      setError('Email ya password galat hai!')
+      setError('Invalid email or password!')
       setLoading(false)
     } else {
       router.push('/')
@@ -38,7 +38,7 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <span className="text-3xl">🌿</span>
           <h1 className="text-2xl font-bold text-gray-900 mt-2">Welcome Back</h1>
-          <p className="text-gray-500 text-sm mt-1">Plant Planet mein login karein</p>
+          <p className="text-gray-500 text-sm mt-1">Login to your account</p>
         </div>
 
         {error && (
@@ -54,7 +54,7 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="aapka@email.com"
+              placeholder="your@email.com"
               required
               className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-green-500"
             />
@@ -77,14 +77,14 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full bg-green-800 text-white py-3 rounded-lg font-medium text-sm hover:bg-green-700 transition-colors disabled:opacity-50"
           >
-            {loading ? 'Login ho raha hai...' : 'Login'}
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-6">
-          Account nahi hai?{' '}
+          Don't have an account?{' '}
           <Link href="/register" className="text-green-700 font-medium">
-            Register karein
+            Register
           </Link>
         </p>
 

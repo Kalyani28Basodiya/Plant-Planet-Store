@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { X } from 'lucide-react'
 import { useCartStore, selectTotalPrice } from '@/store/cartStore'
 
@@ -15,6 +16,7 @@ const imageMap: Record<string, string> = {
 }
 
 export default function CartPage() {
+  const router = useRouter()
   const items = useCartStore((state) => state.items)
   const removeItem = useCartStore((state) => state.removeItem)
   const updateQuantity = useCartStore((state) => state.updateQuantity)
@@ -191,6 +193,7 @@ export default function CartPage() {
             </div>
 
             <button
+              onClick={() => router.push('/checkout')}
               style={{
                 width: '100%',
                 marginTop: '16px',
