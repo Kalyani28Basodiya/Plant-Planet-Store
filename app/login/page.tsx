@@ -87,10 +87,6 @@ export default function LoginPage() {
             Register
           </Link>
         </p>
-
-        <div className="mt-4 p-3 bg-gray-50 rounded-lg text-xs text-gray-500 text-center">
-          Test: kalyani@gmail.com / 123456
-        </div>
       </div>
     </main>
   )
