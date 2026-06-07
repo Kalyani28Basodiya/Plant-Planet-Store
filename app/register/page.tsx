@@ -16,7 +16,7 @@ export default function RegisterPage() {
     e.preventDefault()
 
     if (password.length < 6) {
-      setError('Password kam se kam 6 characters ka hona chahiye!')
+      setError('Password must be at least 6 characters!')
       return
     }
 
@@ -34,7 +34,7 @@ export default function RegisterPage() {
         <div className="text-center mb-8">
           <span className="text-3xl">🌿</span>
           <h1 className="text-2xl font-bold text-gray-900 mt-2">Create Account</h1>
-          <p className="text-gray-500 text-sm mt-1">Plant Planet family mein join karein</p>
+          <p className="text-gray-500 text-sm mt-1">Join the Plant Planet family</p>
         </div>
 
         {error && (
@@ -45,7 +45,7 @@ export default function RegisterPage() {
 
         {success && (
           <div className="bg-green-50 text-green-700 text-sm px-4 py-3 rounded-lg mb-4">
-            Account ban gaya! Login page pe ja rahe hain...
+            Account created! Redirecting to login...
           </div>
         )}
 
@@ -56,7 +56,7 @@ export default function RegisterPage() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Aapka naam"
+              placeholder="Your full name"
               required
               className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-green-500"
             />
@@ -84,7 +84,7 @@ export default function RegisterPage() {
               required
               className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-green-500"
             />
-            <p className="text-xs text-gray-400 mt-1">Kam se kam 6 characters</p>
+            <p className="text-xs text-gray-400 mt-1">Minimum 6 characters</p>
           </div>
 
           <button
@@ -96,9 +96,9 @@ export default function RegisterPage() {
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-6">
-          Pehle se account hai?{' '}
+          Already have an account?{' '}
           <Link href="/login" className="text-green-700 font-medium">
-            Login karein
+            Login
           </Link>
         </p>
       </div>

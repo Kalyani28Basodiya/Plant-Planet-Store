@@ -38,7 +38,7 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <span className="text-3xl">🌿</span>
           <h1 className="text-2xl font-bold text-gray-900 mt-2">Welcome Back</h1>
-          <p className="text-gray-500 text-sm mt-1">Login to your account</p>
+          <p className="text-gray-500 text-sm mt-1">Login to your Plant Planet account</p>
         </div>
 
         {error && (
