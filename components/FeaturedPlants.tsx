@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useProducts } from '@/lib/hooks/useProducts'
 
@@ -61,12 +60,10 @@ export default function FeaturedPlants() {
                 overflow: 'hidden',
               }}
             >
-              <Image
+              <img
                 src={product.image}
                 alt={product.name}
-                width={200}
-                height={200}
-                style={{ objectFit: 'cover', display: 'block', borderRadius: 0 }}
+                style={{ width: '100%', height: '200px', objectFit: 'cover' }}
               />
               <div style={{ padding: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>

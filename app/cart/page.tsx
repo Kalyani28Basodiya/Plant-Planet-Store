@@ -1,19 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { X } from 'lucide-react'
 import { useCartStore, selectTotalPrice } from '@/store/cartStore'
-
-const imageMap: Record<string, string> = {
-  '1': 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=300',
-  '2': 'https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=300',
-  '3': 'https://images.unsplash.com/photo-1598880940942-9b77f8f8b0e3?w=300',
-  '4': 'https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?w=300',
-  '5': 'https://images.unsplash.com/photo-1559563458-527698bf5295?w=300',
-  '6': 'https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=300',
-}
 
 export default function CartPage() {
   const router = useRouter()
@@ -72,12 +62,10 @@ export default function CartPage() {
                 }}
               >
                 {/* Image */}
-                <Image
-                  src={imageMap[item.id] ?? item.image}
+                <img
+                  src={item.image}
                   alt={item.name}
-                  width={80}
-                  height={80}
-                  style={{ objectFit: 'cover', borderRadius: '8px', flexShrink: 0 }}
+                  style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px' }}
                 />
 
                 {/* Info */}

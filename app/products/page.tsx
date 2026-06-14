@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
 import { useProducts } from '@/lib/hooks/useProducts'
 
 const colorDots = ['#8B4513', '#228B22', '#1a1a1a']
@@ -72,12 +71,10 @@ export default function ProductsPage() {
               cursor: 'pointer',
             }}
           >
-            <Image
+            <img
               src={product.image}
               alt={product.name}
-              width={240}
-              height={240}
-              style={{ objectFit: 'cover', display: 'block', width: '100%' }}
+              style={{ width: '100%', height: '220px', objectFit: 'cover' }}
             />
             <div style={{ padding: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>

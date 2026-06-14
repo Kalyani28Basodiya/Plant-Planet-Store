@@ -1,7 +1,6 @@
 'use client'
 
 import { use, useState } from 'react'
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { useCartStore } from '@/store/cartStore'
 import { useProduct } from '@/lib/hooks/useProducts'
@@ -35,12 +34,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }}>
         {/* Left: Image */}
         <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
-          <Image
+          <img
             src={product.image}
             alt={product.name}
-            width={500}
-            height={500}
-            style={{ objectFit: 'contain', display: 'block', width: '100%', height: '420px' }}
+            style={{ width: '100%', height: '500px', objectFit: 'cover' }}
           />
         </div>
 
