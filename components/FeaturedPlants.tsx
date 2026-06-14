@@ -2,20 +2,20 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import productsData from '@/data/products.json'
-
-const imageMap: Record<number, string> = {
-  1: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=300',
-  2: 'https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=300',
-  3: 'https://images.unsplash.com/photo-1598880940942-9b77f8f8b0e3?w=300',
-  4: 'https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?w=300',
-  5: 'https://images.unsplash.com/photo-1559563458-527698bf5295?w=300',
-  6: 'https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=300',
-}
+import { useProducts } from '@/lib/hooks/useProducts'
 
 const colorDots = ['#8B4513', '#228B22', '#1a1a1a']
 
 export default function FeaturedPlants() {
+  const { data: allProducts, isLoading } = useProducts()
+  const products = allProducts?.slice(0, 6) || []
+
+  if (isLoading) return (
+    <div style={{ padding: '60px 80px' }}>
+      <p>Loading...</p>
+    </div>
+  )
+
   return (
     <section style={{ backgroundColor: 'white', padding: '60px 80px' }}>
       {/* Header */}
@@ -45,9 +45,9 @@ export default function FeaturedPlants() {
           scrollbarWidth: 'none',
         }}
       >
-        {productsData.map((product) => (
+        {products.map((product: any) => (
           <Link
-            key={product.id}
+            key={product._id}
             href={`/products/${product.slug}`}
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
@@ -62,7 +62,7 @@ export default function FeaturedPlants() {
               }}
             >
               <Image
-                src={imageMap[product.id]}
+                src={product.image}
                 alt={product.name}
                 width={200}
                 height={200}

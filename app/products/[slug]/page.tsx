@@ -3,32 +3,29 @@
 import { use, useState } from 'react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import productsData from '@/data/products.json'
 import { useCartStore } from '@/store/cartStore'
-
-const imageMap: Record<number, string> = {
-  1: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=600',
-  2: 'https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=600',
-  3: 'https://images.unsplash.com/photo-1598880940942-9b77f8f8b0e3?w=600',
-  4: 'https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?w=600',
-  5: 'https://images.unsplash.com/photo-1559563458-527698bf5295?w=600',
-  6: 'https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=600',
-}
+import { useProduct } from '@/lib/hooks/useProducts'
 
 export default function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
-  const product = productsData.find((p) => p.slug === slug)
-  if (!product) notFound()
-
+  const { data: product, isLoading } = useProduct(slug)
   const [quantity, setQuantity] = useState(1)
   const addItem = useCartStore((state) => state.addItem)
 
+  if (isLoading) return (
+    <main style={{ backgroundColor: '#f9fafb', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <p style={{ color: '#6b7280' }}>Loading...</p>
+    </main>
+  )
+
+  if (!product) notFound()
+
   const handleAddToCart = () => {
     addItem({
-      id: String(product.id),
+      id: String(product._id),
       name: product.name,
       price: product.price,
-      image: imageMap[product.id],
+      image: product.image,
       quantity,
     })
   }
@@ -39,7 +36,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
         {/* Left: Image */}
         <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
           <Image
-            src={imageMap[product.id]}
+            src={product.image}
             alt={product.name}
             width={500}
             height={500}

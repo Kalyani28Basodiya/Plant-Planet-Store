@@ -3,28 +3,22 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import productsData from '@/data/products.json'
-
-const imageMap: Record<number, string> = {
-  1: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=300',
-  2: 'https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=300',
-  3: 'https://images.unsplash.com/photo-1598880940942-9b77f8f8b0e3?w=300',
-  4: 'https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?w=300',
-  5: 'https://images.unsplash.com/photo-1559563458-527698bf5295?w=300',
-  6: 'https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=300',
-}
+import { useProducts } from '@/lib/hooks/useProducts'
 
 const colorDots = ['#8B4513', '#228B22', '#1a1a1a']
 
-const filters = ['All', 'indoor', 'outdoor', 'succulent', 'herb']
+const filters = ['all', 'indoor', 'outdoor', 'succulent', 'herb']
 
 export default function ProductsPage() {
   const router = useRouter()
-  const [activeFilter, setActiveFilter] = useState('All')
+  const [activeFilter, setActiveFilter] = useState('all')
+  const { data: products, isLoading } = useProducts(activeFilter)
 
-  const filtered = activeFilter === 'All'
-    ? productsData
-    : productsData.filter((p) => p.category === activeFilter)
+  if (isLoading) return (
+    <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <p className="text-gray-500">Loading plants...</p>
+    </main>
+  )
 
   return (
     <div style={{ backgroundColor: '#f9fafb', minHeight: '100vh', padding: '40px 80px' }}>
@@ -66,9 +60,9 @@ export default function ProductsPage() {
           marginTop: '32px',
         }}
       >
-        {filtered.map((product) => (
+        {(products || []).map((product: any) => (
           <div
-            key={product.id}
+            key={product._id}
             onClick={() => router.push(`/products/${product.slug}`)}
             style={{
               backgroundColor: 'white',
@@ -79,7 +73,7 @@ export default function ProductsPage() {
             }}
           >
             <Image
-              src={imageMap[product.id]}
+              src={product.image}
               alt={product.name}
               width={240}
               height={240}
