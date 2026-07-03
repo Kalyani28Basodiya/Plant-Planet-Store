@@ -2,14 +2,17 @@
 
 import { use, useState } from 'react'
 import { notFound } from 'next/navigation'
-import { useCartStore } from '@/store/cartStore'
+import { useSession } from 'next-auth/react'
+import { useUserCart } from '@/store/cartStore'
 import { useProduct } from '@/lib/hooks/useProducts'
 
 export default function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
   const { data: product, isLoading } = useProduct(slug)
   const [quantity, setQuantity] = useState(1)
-  const addItem = useCartStore((state) => state.addItem)
+  const { data: session } = useSession()
+  const store = useUserCart(session?.user?.email)
+  const addItem = store((state) => state.addItem)
 
   if (isLoading) return (
     <main style={{ backgroundColor: '#f9fafb', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -37,13 +40,13 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
           <img
             src={product.image}
             alt={product.name}
-            style={{ width: '100%', height: '500px', objectFit: 'cover' }}
+            className="product-img-lg"
+            style={{ width: '100%' }}
           />
         </div>
 
         {/* Right: Details */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {/* Category badge */}
           <span
             style={{
               display: 'inline-block',
@@ -60,31 +63,26 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             {product.category}
           </span>
 
-          {/* Name */}
           <h1 style={{ fontSize: '32px', fontWeight: '700', color: '#111827', margin: 0 }}>
             {product.name}
           </h1>
 
-          {/* Rating */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '20px' }}>⭐</span>
             <span style={{ fontSize: '16px', fontWeight: '600', color: '#111827' }}>{product.rating}</span>
             <span style={{ fontSize: '14px', color: '#6b7280' }}>/ 5.0</span>
           </div>
 
-          {/* Price */}
           <p style={{ fontSize: '28px', fontWeight: '700', color: '#166534', margin: 0 }}>
             ₹{product.price}
           </p>
 
-          {/* Description */}
           <p style={{ fontSize: '15px', color: '#4b5563', lineHeight: '1.7', margin: 0 }}>
             {product.description}
           </p>
 
           {product.inStock ? (
             <>
-              {/* Quantity selector */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <span style={{ fontSize: '14px', color: '#374151', fontWeight: '500' }}>Quantity</span>
                 <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
@@ -122,7 +120,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                 </div>
               </div>
 
-              {/* Add to Cart */}
               <button
                 onClick={handleAddToCart}
                 style={{

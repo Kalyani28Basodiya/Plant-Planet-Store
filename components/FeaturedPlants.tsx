@@ -1,13 +1,18 @@
 'use client'
 
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 import { useProducts } from '@/lib/hooks/useProducts'
+import { useUserCart } from '@/store/cartStore'
 
 const colorDots = ['#8B4513', '#228B22', '#1a1a1a']
 
 export default function FeaturedPlants() {
   const { data: allProducts, isLoading } = useProducts()
   const products = allProducts?.slice(0, 6) || []
+  const { data: session } = useSession()
+  const store = useUserCart(session?.user?.email)
+  const addItem = store((state) => state.addItem)
 
   if (isLoading) return (
     <div style={{ padding: '60px 80px' }}>
@@ -17,7 +22,6 @@ export default function FeaturedPlants() {
 
   return (
     <section style={{ backgroundColor: 'white', padding: '60px 80px' }}>
-      {/* Header */}
       <div
         style={{
           display: 'flex',
@@ -34,7 +38,6 @@ export default function FeaturedPlants() {
         </Link>
       </div>
 
-      {/* Scrollable cards row */}
       <div
         style={{
           display: 'flex',
@@ -63,7 +66,8 @@ export default function FeaturedPlants() {
               <img
                 src={product.image}
                 alt={product.name}
-                style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                className="product-img"
+                style={{ width: '100%' }}
               />
               <div style={{ padding: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
@@ -91,6 +95,17 @@ export default function FeaturedPlants() {
                     ))}
                   </div>
                   <button
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      addItem({
+                        id: String(product._id),
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1,
+                      })
+                    }}
                     style={{
                       backgroundColor: '#166534',
                       color: 'white',

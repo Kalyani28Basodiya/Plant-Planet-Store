@@ -1,10 +1,11 @@
 'use client'
 
-import { useCartStore } from '@/store/cartStore'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useEffect } from 'react'
 import Link from 'next/link'
+import { useUserCart } from '@/store/cartStore'
 
 declare global {
   interface Window {
@@ -15,12 +16,20 @@ declare global {
 export default function CheckoutPage() {
   const { data: session } = useSession()
   const router = useRouter()
-  const items = useCartStore(state => state.items)
-  const clearCart = useCartStore(state => state.clearCart)
+  const store = useUserCart(session?.user?.email)
+  const items = store((state) => state.items)
+  const clearCart = store((state) => state.clearCart)
   const [loading, setLoading] = useState(false)
-  const [name, setName] = useState(session?.user?.name || '')
+  const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
+
+  useEffect(() => {
+  if (session?.user?.name) {
+    setName(session.user.name)
+  }
+}, [session])
+
 
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const delivery = 49
@@ -65,7 +74,36 @@ export default function CheckoutPage() {
       name: 'Plant Planet',
       description: 'Plant Purchase',
       order_id: order.id,
-      handler: function () {
+      handler: async function (response: { razorpay_payment_id: string }) {
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: session?.user?.email ?? 'guest',
+            userName: name,
+            userEmail: session?.user?.email ?? '',
+            items: items.map((i) => ({
+              id: i.id,
+              name: i.name,
+              price: i.price,
+              qty: i.quantity,
+              image: i.image,
+            })),
+            address,
+            phone,
+            subtotal,
+            delivery,
+            tax,
+            total,
+            paymentId: response.razorpay_payment_id,
+          }),
+        })
+
+        if (!res.ok) {
+          alert('Payment hua lekin order save nahi ho saka. Support se contact karein.')
+          return
+        }
+
         clearCart()
         router.push('/order-success')
       },

@@ -3,14 +3,17 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { X } from 'lucide-react'
-import { useCartStore, selectTotalPrice } from '@/store/cartStore'
+import { useSession } from 'next-auth/react'
+import { useUserCart, selectTotalPrice } from '@/store/cartStore'
 
 export default function CartPage() {
   const router = useRouter()
-  const items = useCartStore((state) => state.items)
-  const removeItem = useCartStore((state) => state.removeItem)
-  const updateQuantity = useCartStore((state) => state.updateQuantity)
-  const total = useCartStore(selectTotalPrice)
+  const { data: session } = useSession()
+  const store = useUserCart(session?.user?.email)
+  const items = store((state) => state.items)
+  const removeItem = store((state) => state.removeItem)
+  const updateQuantity = store((state) => state.updateQuantity)
+  const total = store(selectTotalPrice)
 
   const delivery = 49
   const tax = Math.round(total * 0.05)
@@ -61,14 +64,12 @@ export default function CartPage() {
                   alignItems: 'center',
                 }}
               >
-                {/* Image */}
                 <img
                   src={item.image}
                   alt={item.name}
-                  style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px' }}
+                  className="cart-img"
                 />
 
-                {/* Info */}
                 <div style={{ flex: 1 }}>
                   <p style={{ fontSize: '16px', fontWeight: '600', color: '#111827', margin: '0 0 2px' }}>
                     {item.name}
@@ -78,7 +79,6 @@ export default function CartPage() {
                   </p>
                 </div>
 
-                {/* Quantity controls */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <button
                     onClick={() => updateQuantity(item.id, item.quantity - 1)}
@@ -119,7 +119,6 @@ export default function CartPage() {
                   </button>
                 </div>
 
-                {/* Delete */}
                 <button
                   onClick={() => removeItem(item.id)}
                   style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}

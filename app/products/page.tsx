@@ -2,7 +2,9 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import { useProducts } from '@/lib/hooks/useProducts'
+import { useUserCart } from '@/store/cartStore'
 
 const colorDots = ['#8B4513', '#228B22', '#1a1a1a']
 
@@ -12,6 +14,9 @@ export default function ProductsPage() {
   const router = useRouter()
   const [activeFilter, setActiveFilter] = useState('all')
   const { data: products, isLoading } = useProducts(activeFilter)
+  const { data: session } = useSession()
+  const store = useUserCart(session?.user?.email)
+  const addItem = store((state) => state.addItem)
 
   if (isLoading) return (
     <main className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -21,7 +26,6 @@ export default function ProductsPage() {
 
   return (
     <div style={{ backgroundColor: '#f9fafb', minHeight: '100vh', padding: '40px 80px' }}>
-      {/* Title */}
       <h1 style={{ fontSize: '28px', fontWeight: '600', color: '#111827', margin: 0 }}>
         All Plants
       </h1>
@@ -29,7 +33,6 @@ export default function ProductsPage() {
         Find your perfect green companion
       </p>
 
-      {/* Filter buttons */}
       <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '24px' }}>
         {filters.map((f) => (
           <button
@@ -50,7 +53,6 @@ export default function ProductsPage() {
         ))}
       </div>
 
-      {/* Products grid */}
       <div
         style={{
           display: 'grid',
@@ -74,7 +76,8 @@ export default function ProductsPage() {
             <img
               src={product.image}
               alt={product.name}
-              style={{ width: '100%', height: '220px', objectFit: 'cover' }}
+              className="product-img"
+              style={{ width: '100%' }}
             />
             <div style={{ padding: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
@@ -121,36 +124,45 @@ export default function ProductsPage() {
                     ))}
                   </div>
                 </div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                {product.inStock ? (
-                  <button
-                    onClick={(e) => e.stopPropagation()}
-                    style={{
-                      backgroundColor: '#166534',
-                      color: 'white',
-                      padding: '8px 16px',
-                      borderRadius: '8px',
-                      fontSize: '13px',
-                      border: 'none',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Add to Cart
-                  </button>
-                ) : (
-                  <span
-                    style={{
-                      backgroundColor: '#fee2e2',
-                      color: '#dc2626',
-                      padding: '8px 16px',
-                      borderRadius: '8px',
-                      fontSize: '13px',
-                    }}
-                  >
-                    Out of Stock
-                  </span>
-                )}
-              </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  {product.inStock ? (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        addItem({
+                          id: String(product._id),
+                          name: product.name,
+                          price: product.price,
+                          image: product.image,
+                          quantity: 1,
+                        })
+                      }}
+                      style={{
+                        backgroundColor: '#166534',
+                        color: 'white',
+                        padding: '8px 16px',
+                        borderRadius: '8px',
+                        fontSize: '13px',
+                        border: 'none',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Add to Cart
+                    </button>
+                  ) : (
+                    <span
+                      style={{
+                        backgroundColor: '#fee2e2',
+                        color: '#dc2626',
+                        padding: '8px 16px',
+                        borderRadius: '8px',
+                        fontSize: '13px',
+                      }}
+                    >
+                      Out of Stock
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>

@@ -5,7 +5,7 @@ const OrderSchema = new mongoose.Schema({
   userName: { type: String, required: true },
   userEmail: { type: String, required: true },
   items: [{
-    id: Number,
+    id: String,
     name: String,
     price: Number,
     qty: Number,
@@ -25,5 +25,7 @@ const OrderSchema = new mongoose.Schema({
   },
 }, { timestamps: true })
 
-export default mongoose.models.Order ||
-  mongoose.model('Order', OrderSchema)
+if (mongoose.models.Order) {
+  delete mongoose.models.Order
+}
+export default mongoose.model('Order', OrderSchema)

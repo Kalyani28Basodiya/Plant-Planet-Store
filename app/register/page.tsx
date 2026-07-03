@@ -12,20 +12,36 @@ export default function RegisterPage() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  setError('')
 
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters!')
+  if (password.length < 6) {
+    setError('Password must be at least 6 characters!')
+    return
+  }
+
+  try {
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password }),
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      setError(data.error || 'Registration failed')
       return
     }
 
-    // Real database integration Phase 3 mein hogi
     setSuccess(true)
-    setTimeout(() => {
-      router.push('/login')
-    }, 2000)
+    setTimeout(() => router.push('/login'), 2000)
+
+  } catch (err) {
+    setError('Something went wrong. Try again!')
   }
+}
 
   return (
     <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">

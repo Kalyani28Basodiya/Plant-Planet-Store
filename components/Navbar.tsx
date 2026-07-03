@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { ShoppingCart, User } from 'lucide-react'
-import { useCartStore } from '@/store/cartStore'
+import { useUserCart, selectTotalItems } from '@/store/cartStore'
 import { useSession, signOut } from 'next-auth/react'
 
 const navLinks = [
@@ -17,11 +17,10 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname()
   const router = useRouter()
-  const totalItems = useCartStore(
-    (state) => state.items.length
-  )
-  const [hovered, setHovered] = useState<string | null>(null)
   const { data: session } = useSession()
+  const store = useUserCart(session?.user?.email)
+  const totalItems = store(selectTotalItems)
+  const [hovered, setHovered] = useState<string | null>(null)
   const [showDropdown, setShowDropdown] = useState(false)
 
   const getLinkStyle = (href: string) => ({

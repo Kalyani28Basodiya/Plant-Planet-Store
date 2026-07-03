@@ -1,5 +1,27 @@
 @import "tailwindcss";
 
+img.product-img {
+  height: 200px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+img.product-img-lg {
+  height: 500px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+img.cart-img {
+  height: 80px !important;
+  width: 80px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  display: block !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;
