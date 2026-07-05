@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useProducts } from '@/lib/hooks/useProducts'
@@ -73,11 +74,13 @@ export default function ProductsPage() {
               cursor: 'pointer',
             }}
           >
-            <img
+            <Image
               src={product.image}
               alt={product.name}
               className="product-img"
-              style={{ width: '100%' }}
+              width={400}
+              height={400}
+              style={{ objectFit: 'cover' }}
             />
             <div style={{ padding: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>

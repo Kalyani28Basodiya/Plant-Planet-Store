@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { useProducts } from '@/lib/hooks/useProducts'
 import { useUserCart } from '@/store/cartStore'
@@ -63,11 +64,13 @@ export default function FeaturedPlants() {
                 overflow: 'hidden',
               }}
             >
-              <img
+              <Image
                 src={product.image}
                 alt={product.name}
                 className="product-img"
-                style={{ width: '100%' }}
+                width={400}
+                height={400}
+                style={{ objectFit: 'cover' }}
               />
               <div style={{ padding: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>

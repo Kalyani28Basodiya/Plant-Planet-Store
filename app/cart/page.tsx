@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { X } from 'lucide-react'
 import { useSession } from 'next-auth/react'
@@ -64,10 +65,13 @@ export default function CartPage() {
                   alignItems: 'center',
                 }}
               >
-                <img
+                <Image
                   src={item.image}
                   alt={item.name}
                   className="cart-img"
+                  width={80}
+                  height={80}
+                  style={{ objectFit: 'cover' }}
                 />
 
                 <div style={{ flex: 1 }}>

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useUserCart, CartItem } from '@/store/cartStore'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function ProfilePage() {
   const { data: session, status } = useSession()
@@ -111,10 +112,13 @@ export default function ProfilePage() {
                 {cartItems.map((item: CartItem) => (
                   <div key={item.id} className="flex items-center justify-between gap-4 py-2 border-b border-gray-50 last:border-0">
                     <div className="flex items-center gap-3">
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.name}
                         className="w-12 h-12 rounded-lg object-cover bg-gray-100"
+                        width={80}
+                        height={80}
+                        style={{ objectFit: 'cover' }}
                       />
                       <div>
                         <p className="text-sm font-medium text-gray-900">{item.name}</p>

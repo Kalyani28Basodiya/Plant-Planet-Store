@@ -110,7 +110,7 @@ export default function Hero() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <div style={{ position: 'relative', width: '100%', height: '320px', overflow: 'hidden' }}>
             <Image
-              src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=300"
+              src="https://images.pexels.com/photos/30923809/pexels-photo-30923809.jpeg"
               alt="Indoor plant in pot"
               fill
               style={{ objectFit: 'cover', borderRadius: 0 }}
@@ -119,7 +119,7 @@ export default function Hero() {
           </div>
           <div style={{ position: 'relative', width: '100%', height: '180px', overflow: 'hidden' }}>
             <Image
-              src="https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=300"
+              src=" https://images.pexels.com/photos/15156681/pexels-photo-15156681.jpeg?w=300"
               alt="Green succulent plant"
               fill
               style={{ objectFit: 'cover', borderRadius: 0 }}
@@ -132,7 +132,7 @@ export default function Hero() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <div style={{ position: 'relative', width: '100%', height: '180px', overflow: 'hidden' }}>
             <Image
-              src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300"
+              src="https://images.pexels.com/photos/4404792/pexels-photo-4404792.jpeg"
               alt="Garden plants"
               fill
               style={{ objectFit: 'cover', borderRadius: 0 }}
@@ -141,7 +141,7 @@ export default function Hero() {
           </div>
           <div style={{ position: 'relative', width: '100%', height: '320px', overflow: 'hidden' }}>
             <Image
-              src="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=300"
+              src=" https://images.pexels.com/photos/9707261/pexels-photo-9707261.jpeg?w=300"
               alt="Tropical houseplant"
               fill
               style={{ objectFit: 'cover', borderRadius: 0 }}
