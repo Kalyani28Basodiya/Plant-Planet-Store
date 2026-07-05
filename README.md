@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🌿 Plant Planet Store
 
-First, run the development server:
+A full-stack e-commerce web app for buying plants online — with real authentication, cart, and payments.
+
+🔗 **Live Demo:** https://plant-planet-store.vercel.app
+
+---
+
+## 📸 Screenshots
+
+> *(Add your screenshots here)*
+
+---
+
+## 🤔 Why I Built This
+
+Most plant shopping websites are cluttered and confusing. I wanted to build a clean, minimal plant store with real backend features — not just a static UI. Every feature here is connected to a real database and real payment gateway.
+
+---
+
+## ✨ Features
+
+- 🔐 Register & Login with secure password hashing (bcrypt)
+- 🛒 User-specific cart — each user has their own cart
+- 🌱 Browse plants by category with filters
+- 📦 Product detail page with quantity selector
+- 💳 Razorpay payment gateway integration
+- 🧾 Orders saved to MongoDB after payment
+- 👤 Profile page with order history
+- 📱 Responsive design
+
+---
+
+## 🛠️ Tech Stack
+
+| Frontend | Auth | Database | Payment | Deploy |
+|----------|------|----------|---------|--------|
+| Next.js 15 | NextAuth.js | MongoDB Atlas | Razorpay | Vercel |
+| TypeScript | JWT Sessions | Mongoose | — | — |
+| Tailwind CSS | bcryptjs | — | — | — |
+| TanStack Query | — | — | — | — |
+| Zustand | — | — | — | — |
+
+---
+
+## 🧠 Technical Challenges I Faced
+
+### 1. User-Specific Cart
+Zustand cart store was using a fixed localStorage key `cart-storage` — so all users shared the same cart. Fixed it by creating a dynamic key `cart-{email}` so every user gets their own isolated cart.
+
+### 2. Mongoose Model Caching
+After changing the Order schema's `id` field from `Number` to `String`, the old compiled model was cached in memory. Had to delete the cached model and recreate it to apply the new schema.
+
+### 3. Order Saving After Payment
+Razorpay's `handler` function is not async by default. Had to convert it to async and add a POST call to `/api/orders` inside the handler — only redirecting to success page after the order was confirmed saved in MongoDB.
+
+### 4. Session Timing Issue
+`useSession` loads after component renders, so `session?.user?.name` was empty when initializing `useState` — causing `userName` validation errors in MongoDB. Fixed using `useEffect` to set name once session loads.
+
+---
+
+## 🚀 Future Improvements
+
+- [ ] Admin dashboard to manage orders
+- [ ] Order status tracking (pending → shipped → delivered)
+- [ ] Email confirmation after order
+- [ ] Wishlist feature
+- [ ] Search functionality
+- [ ] Mobile app with React Native
+
+---
+
+## ⚙️ Setup & Installation
+
+```bash
+git clone https://github.com/Kalyani28Basodiya/Plant-Planet-Store.git
+cd Plant-Planet-Store
+npm install
+```
+
+Create `.env.local`:
+
+```env
+MONGODB_URI=your_mongodb_uri
+NEXTAUTH_SECRET=your_secret
+NEXTAUTH_URL=http://localhost:3000
+RAZORPAY_KEY_ID=your_key_id
+RAZORPAY_KEY_SECRET=your_key_secret
+NEXT_PUBLIC_RAZORPAY_KEY_ID=your_key_id
+```
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👩‍💻 Built by Kalyani Basodiya
