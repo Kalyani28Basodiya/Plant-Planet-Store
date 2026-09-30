@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plant Planet — Study Guide</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f4f0;
+      color: #1a1a1a;
+      padding: 30px 20px;
+    }
+
+    /* ── Cover Page ── */
+    .cover {
+      text-align: center;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, #1b5e20, #2e7d32, #43a047);
+      border-radius: 16px;
+      color: white;
+      margin-bottom: 40px;
+      page-break-after: always;
+    }
+    .cover .emoji { font-size: 72px; }
+    .cover h1 { font-size: 36px; margin: 16px 0 8px; letter-spacing: 1px; }
+    .cover p  { font-size: 16px; opacity: 0.85; margin-bottom: 6px; }
+    .cover .badge {
+      display: inline-block;
+      margin-top: 20px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    /* ── Section headings ── */
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1b5e20;
+      border-left: 5px solid #43a047;
+      padding-left: 12px;
+      margin: 36px 0 16px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      page-break-inside: avoid;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .card-header .icon { font-size: 26px; }
+    .card-header h2   { font-size: 18px; color: #2e7d32; font-weight: 700; }
+    .card-header .day-badge {
+      margin-left: auto;
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ── Topic rows ── */
+    .topic-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f1f1;
+    }
+    .topic-row:last-child { border-bottom: none; }
+    .topic-row .bullet {
+      width: 8px; height: 8px;
+      background: #43a047;
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .topic-row .text  { flex: 1; font-size: 14px; color: #333; }
+    .topic-row .where { font-size: 12px; color: #888; font-style: italic; }
+
+    /* ── Code pill ── */
+    code {
+      background: #e8f5e9;
+      color: #1b5e20;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ── Interview Q section ── */
+    .qa-list { list-style: none; }
+    .qa-list li {
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      background: #f9fbe7;
+      border-left: 4px solid #aed581;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .qa-list li strong { color: #33691e; }
+
+    /* ── Priority table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th {
+      background: #2e7d32;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    td { padding: 9px 14px; border-bottom: 1px solid #e0e0e0; }
+    tr:nth-child(even) td { background: #f9f9f9; }
+    .priority-high   { color: #c62828; font-weight: 700; }
+    .priority-medium { color: #e65100; font-weight: 700; }
+    .priority-low    { color: #2e7d32; font-weight: 700; }
+
+    /* ── Checklist ── */
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    .checklist-item:last-child { border-bottom: none; }
+    .checkbox {
+      width: 18px; height: 18px;
+      border: 2px solid #43a047;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    /* ── Tips box ── */
+    .tip-box {
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 20px;
+    }
+    .tip-box h3 { color: #f57f17; margin-bottom: 10px; font-size: 15px; }
+    .tip-box p  { font-size: 13.5px; color: #555; line-height: 1.6; }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      background: #1b5e20;
+      border-radius: 12px;
+      color: white;
+      font-size: 14px;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; padding: 0; }
+      .cover { border-radius: 0; }
+      .card  { box-shadow: none; border: 1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ COVER ══════════════ -->
+<div class="cover">
+  <div class="emoji">🌿</div>
+  <h1>Plant Planet — Study Guide</h1>
+  <p>Resume Project ke liye Complete Topic Roadmap</p>
+  <p>Full-Stack Next.js E-Commerce Project</p>
+  <div class="badge">📅 Daily Study Plan · 10 Topics · Interview Ready</div>
+</div>
+
+<!-- ══════════════ PRIORITY TABLE ══════════════ -->
+<div class="section-title">📊 Priority Order — Kya Pehle Padhein</div>
+<div class="card">
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Topic</th>
+      <th>Priority</th>
+      <th>Din</th>
+      <th>Interview Weight</th>
+    </tr>
+    <tr><td>1</td><td>Next.js App Router</td><td class="priority-high">🔴 High</td><td>Day 1–2</td><td>⭐⭐⭐⭐⭐</td></tr>
+    <tr><td>2</td><td>MongoDB + Mongoose</td><td class="priority-high">🔴 High</td><td>Day 3–4</td><td>⭐⭐⭐⭐⭐</td></tr>
+    <tr><td>3</td><td>NextAuth.js (Authentication)</td><td class="priority-high">🔴 High</td><td>Day 5–6</td><td>⭐⭐⭐⭐⭐</td></tr>
+    <tr><td>4</td><td>Zustand (State Management)</td><td class="priority-medium">🟠 Medium</td><td>Day 7</td><td>⭐⭐⭐⭐</td></tr>
+    <tr><td>5</td><td>TanStack React Query</td><td class="priority-medium">🟠 Medium</td><td>Day 8</td><td>⭐⭐⭐⭐</td></tr>
+    <tr><td>6</td><td>Razorpay Integration</td><td class="priority-medium">🟠 Medium</td><td>Day 9</td><td>⭐⭐⭐</td></tr>
+    <tr><td>7</td><td>REST API Design</td><td class="priority-medium">🟠 Medium</td><td>Day 10</td><td>⭐⭐⭐⭐</td></tr>
+    <tr><td>8</td><td>TypeScript Basics</td><td class="priority-low">🟢 Low</td><td>Day 11</td><td>⭐⭐⭐</td></tr>
+    <tr><td>9</td><td>Tailwind CSS + ShadCN</td><td class="priority-low">🟢 Low</td><td>Day 12</td><td>⭐⭐</td></tr>
+    <tr><td>10</td><td>React 19 Fundamentals</td><td class="priority-low">🟢 Low</td><td>Day 13</td><td>⭐⭐⭐</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════ DAY 1–2 ══════════════ -->
+<div class="section-title">📅 Day 1–2 — Next.js App Router</div>
+<div class="card">
+  <div class="card-header">
+    <span class="icon">⚡</span>
+    <h2>Next.js 15+ App Router</h2>
+    <span class="day-badge">Day 1 – 2</span>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>App Router vs Pages Router</strong><br>
+      <span class="where">Pages Router purana tha (<code>pages/</code>), App Router naya hai (<code>app/</code>) — ye project App Router use karta hai</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Server Components vs Client Components</strong><br>
+      <span class="where">By default sab Server Components hain — <code>"use client"</code> likhne se Client Component banta hai. Navbar, Cart — client; API fetch — server.</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Dynamic Routes — <code>[slug]</code></strong><br>
+      <span class="where"><code>app/products/[slug]/page.tsx</code> — URL se dynamic value milti hai</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Route Handlers (API Routes)</strong><br>
+      <span class="where"><code>app/api/products/route.ts</code> — GET, POST functions export karte hain</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Layout.tsx — Shared Layout</strong><br>
+      <span class="where"><code>app/layout.tsx</code> — Navbar aur Footer yahan wrap hote hain, har page pe show hote hain</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Special Files</strong><br>
+      <span class="where"><code>page.tsx</code>, <code>layout.tsx</code>, <code>loading.tsx</code>, <code>error.tsx</code>, <code>not-found.tsx</code> — Next.js inhe automatically use karta hai</span>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <h3>💡 Interview Answer</h3>
+    <p><strong>Q: App Router mein Server aur Client component ka difference?</strong><br>
+    Server Components server pe render hote hain — direct DB access possible, JavaScript bundle mein nahi jaate. Client Components browser pe hydrate hote hain — state, events ke liye zaroori hain. <code>"use client"</code> directive use karo.</p>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 3–4 ══════════════ -->
+<div class="section-title">📅 Day 3–4 — MongoDB + Mongoose</div>
+<div class="card">
+  <div class="card-header">
+    <span class="icon">🍃</span>
+    <h2>MongoDB + Mongoose</h2>
+    <span class="day-badge">Day 3 – 4</span>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>MongoDB kya hai?</strong><br>
+      <span class="where">NoSQL database — JSON-like documents store karta hai, tables nahi. Plant Planet mein Products, Users, Orders store hote hain</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>MongoDB Atlas</strong><br>
+      <span class="where">Cloud-hosted MongoDB — <code>.env</code> mein <code>MONGODB_URI</code> se connect hota hai</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Mongoose ODM</strong><br>
+      <span class="where">Object Document Mapper — JavaScript objects ko MongoDB documents mein map karta hai</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Schema &amp; Model</strong><br>
+      <span class="where">Schema = structure define karo (field names, types, validation). Model = Schema se collection banao</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>CRUD Operations</strong><br>
+      <span class="where"><code>Model.find()</code>, <code>Model.findOne()</code>, <code>Model.create()</code>, <code>Model.findByIdAndUpdate()</code>, <code>Model.deleteOne()</code></span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Connection Pooling — <code>lib/mongodb.ts</code></strong><br>
+      <span class="where">Ek hi connection bar-bar nahi kholte — cached connection use karte hain (global variable trick)</span>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <h3>💡 Interview Answer</h3>
+    <p><strong>Q: SQL vs MongoDB kab choose karein?</strong><br>
+    MongoDB tab jab data structure flexible ho (products ke alag-alag fields), rapid development ho, ya JSON-like nested data ho. SQL tab jab strict relations hain aur ACID transactions zaroori hain (banking apps).</p>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 5–6 ══════════════ -->
+<div class="section-title">📅 Day 5–6 — NextAuth.js (Authentication)</div>
+<div class="card">
+  <div class="card-header">
+    <span class="icon">🔐</span>
+    <h2>NextAuth.js v4</h2>
+    <span class="day-badge">Day 5 – 6</span>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>NextAuth kya karta hai?</strong><br>
+      <span class="where">Authentication system ready-made — Login, Session, Logout sab handle karta hai</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Credentials Provider</strong><br>
+      <span class="where">Email + Password se login — <code>app/api/register/route.ts</code> mein user create, <code>authorize()</code> function mein verify</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>JWT Tokens</strong><br>
+      <span class="where">Login ke baad JWT token banta hai — browser mein cookie/localStorage mein store hota hai, har request ke saath bheja jaata hai</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Session — <code>useSession()</code></strong><br>
+      <span class="where">Client side pe current user ka data milta hai — <code>session.user.email</code>, <code>session.user.name</code></span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>SessionWrapper — <code>components/SessionWrapper.tsx</code></strong><br>
+      <span class="where"><code>SessionProvider</code> se wrap karte hain taaki poori app mein session accessible ho</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Bcryptjs — Password Hashing</strong><br>
+      <span class="where">Password plain text mein kabhi save nahi karte — <code>bcrypt.hash(password, 10)</code> se hash banate hain, <code>bcrypt.compare()</code> se verify karte hain</span>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <h3>💡 Interview Answer</h3>
+    <p><strong>Q: Why hash passwords?</strong><br>
+    Agar database hack ho jaye toh plain text passwords directly expose ho jaate hain. Bcrypt hashing one-way hai — hash se original password nahi nikal sakte. Salt automatically add hota hai jo rainbow table attacks rokta hai.</p>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 7 ══════════════ -->
+<div class="section-title">📅 Day 7 — Zustand (State Management)</div>
+<div class="card">
+  <div class="card-header">
+    <span class="icon">🐻</span>
+    <h2>Zustand</h2>
+    <span class="day-badge">Day 7</span>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Zustand kya hai?</strong><br>
+      <span class="where">Lightweight global state management — Redux se zyada simple, no boilerplate</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Store Create karna</strong><br>
+      <span class="where"><code>store/cartStore.ts</code> — <code>create()</code> function se store banate hain, state + actions ek jagah</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Store Use karna</strong><br>
+      <span class="where"><code>const { cart, addToCart, removeFromCart } = useCartStore()</code> — kisi bhi component mein directly use</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Persist Middleware</strong><br>
+      <span class="where">Cart data localStorage mein save rehta hai — page refresh ke baad bhi cart nahi jaata</span>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <h3>💡 Interview Answer</h3>
+    <p><strong>Q: Zustand vs Redux?</strong><br>
+    Zustand mein no Provider wrapping, no actions/reducers/dispatch ceremony. Bas ek <code>create()</code> call — state aur functions ek jagah. Chhote-medium projects ke liye perfect. Redux tab jab DevTools, time-travel debugging, ya very complex state logic chahiye.</p>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 8 ══════════════ -->
+<div class="section-title">📅 Day 8 — TanStack React Query</div>
+<div class="card">
+  <div class="card-header">
+    <span class="icon">📡</span>
+    <h2>TanStack Query (React Query v5)</h2>
+    <span class="day-badge">Day 8</span>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>React Query kya hai?</strong><br>
+      <span class="where">Server state management — API calls ko cache karna, background refetch, loading/error states automatically handle</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong><code>useQuery</code></strong><br>
+      <span class="where">Data fetch karne ke liye — <code>queryKey</code> (cache ID) + <code>queryFn</code> (fetch function) deta hai</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong><code>useMutation</code></strong><br>
+      <span class="where">Data create/update/delete ke liye — POST/PUT/DELETE calls</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>QueryProvider Setup</strong><br>
+      <span class="where"><code>components/QueryProvider.tsx</code> — <code>QueryClientProvider</code> se app wrap karte hain</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Caching + Stale Time</strong><br>
+      <span class="where">Same query bar-bar call nahi hoti — cache se milti hai. <code>staleTime</code> set kar sakte hain</span>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <h3>💡 Interview Answer</h3>
+    <p><strong>Q: useEffect se fetch vs React Query?</strong><br>
+    useEffect se: no caching, manually loading/error state manage karna, race conditions possible. React Query mein: automatic caching, deduplication, background sync, retry logic, pagination support — sab built-in.</p>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 9 ══════════════ -->
+<div class="section-title">📅 Day 9 — Razorpay Payment Integration</div>
+<div class="card">
+  <div class="card-header">
+    <span class="icon">💳</span>
+    <h2>Razorpay</h2>
+    <span class="day-badge">Day 9</span>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Payment Flow — 3 Steps</strong><br>
+      <span class="where">1️⃣ Backend pe order create karo → 2️⃣ Frontend pe Razorpay popup open karo → 3️⃣ Backend pe payment verify karo</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Order Create — <code>app/api/create-order/route.ts</code></strong><br>
+      <span class="where">Razorpay SDK se order ID generate karte hain — amount, currency pass karte hain</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Checkout Page</strong><br>
+      <span class="where">Razorpay script load karo, order ID pass karo, popup open hota hai — user pay karta hai</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Payment Verification</strong><br>
+      <span class="where">HMAC signature verify karte hain — <code>razorpay_order_id</code> + <code>razorpay_payment_id</code> se signature match karni padti hai</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Environment Variables</strong><br>
+      <span class="where"><code>RAZORPAY_KEY_ID</code> aur <code>RAZORPAY_KEY_SECRET</code> — .env mein store, kabhi frontend pe expose mat karo</span>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <h3>💡 Interview Answer</h3>
+    <p><strong>Q: Payment ke baad order kaise save karte ho?</strong><br>
+    Payment successful hone ke baad callback mein <code>/api/orders</code> pe POST call karte hain — user ID, cart items, payment ID, total amount MongoDB mein save hota hai. Tab hi order confirm hota hai.</p>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 10 ══════════════ -->
+<div class="section-title">📅 Day 10 — REST API Design</div>
+<div class="card">
+  <div class="card-header">
+    <span class="icon">🌐</span>
+    <h2>REST API Concepts</h2>
+    <span class="day-badge">Day 10</span>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>HTTP Methods</strong><br>
+      <span class="where"><code>GET</code> = data laao | <code>POST</code> = naya create karo | <code>PUT/PATCH</code> = update karo | <code>DELETE</code> = hatao</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Status Codes</strong><br>
+      <span class="where"><code>200</code> OK · <code>201</code> Created · <code>400</code> Bad Request · <code>401</code> Unauthorized · <code>404</code> Not Found · <code>500</code> Server Error</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Project ke API Routes</strong><br>
+      <span class="where"><code>GET /api/products</code> · <code>POST /api/register</code> · <code>POST /api/create-order</code> · <code>GET /api/orders</code> · <code>POST /api/products/seed</code></span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>Request &amp; Response</strong><br>
+      <span class="where">Request mein: headers, body (JSON), params · Response mein: status code, JSON data</span>
+    </div>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text">
+      <strong>NextResponse — Next.js way</strong><br>
+      <span class="where"><code>return NextResponse.json(&#123; data &#125;, &#123; status: 200 &#125;)</code> — App Router ka tarika</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 11 ══════════════ -->
+<div class="section-title">📅 Day 11 — TypeScript</div>
+<div class="card">
+  <div class="card-header">
+    <span class="icon">🔷</span>
+    <h2>TypeScript Basics</h2>
+    <span class="day-badge">Day 11</span>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Types &amp; Interfaces</strong><br><span class="where"><code>interface Product &#123; id: string; name: string; price: number &#125;</code></span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Type Annotations</strong><br><span class="where">Function params, return types — <code>function getProduct(slug: string): Promise&lt;Product&gt;</code></span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Optional Properties</strong><br><span class="where"><code>price?: number</code> — field optional hai</span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Type Assertions</strong><br><span class="where"><code>data as Product</code> — TypeScript ko batao ki ye kaunsa type hai</span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Global Types — <code>types/global.d.ts</code></strong><br><span class="where">Custom types globally available karne ke liye</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 12 ══════════════ -->
+<div class="section-title">📅 Day 12 — Tailwind CSS + ShadCN UI</div>
+<div class="card">
+  <div class="card-header">
+    <span class="icon">🎨</span>
+    <h2>Tailwind CSS v4 + ShadCN</h2>
+    <span class="day-badge">Day 12</span>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Utility-First CSS</strong><br><span class="where">CSS classes directly HTML mein — <code>flex justify-between items-center p-4 bg-green-500</code></span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Tailwind v4 Changes</strong><br><span class="where">No <code>tailwind.config.js</code> — CSS variables based config, <code>@tailwindcss/postcss</code> plugin</span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>ShadCN UI</strong><br><span class="where">Pre-built components — Button, Card, Dialog, Input — copy karo apne project mein, customize karo</span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Radix UI</strong><br><span class="where">ShadCN ka base — accessible, unstyled primitives</span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong><code>cn()</code> utility — <code>lib/utils.ts</code></strong><br><span class="where"><code>clsx + tailwind-merge</code> — conditional classes cleanly merge karne ke liye</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 13 ══════════════ -->
+<div class="section-title">📅 Day 13 — React 19 Fundamentals</div>
+<div class="card">
+  <div class="card-header">
+    <span class="icon">⚛️</span>
+    <h2>React 19 Key Concepts</h2>
+    <span class="day-badge">Day 13</span>
+  </div>
+
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Hooks — <code>useState</code>, <code>useEffect</code>, <code>useRef</code></strong><br><span class="where">State management, side effects, DOM references</span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Custom Hooks</strong><br><span class="where"><code>useSession</code>, <code>useCartStore</code> — reusable logic</span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>Props &amp; Component Composition</strong><br><span class="where">Parent se child ko data pass karna</span></div>
+  </div>
+  <div class="topic-row">
+    <div class="bullet"></div>
+    <div class="text"><strong>React 19 New — <code>use()</code> hook</strong><br><span class="where">Promise directly component mein use kar sakte hain — async/await component level pe</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ INTERVIEW Q&A ══════════════ -->
+<div class="section-title">🎯 Top 15 Interview Questions — Plant Planet Project</div>
+<div class="card">
+  <ul class="qa-list">
+    <li><strong>Q1.</strong> App Router aur Pages Router mein kya difference hai?</li>
+    <li><strong>Q2.</strong> Server Component aur Client Component kab use karte ho?</li>
+    <li><strong>Q3.</strong> Dynamic Route <code>[slug]</code> kaise kaam karta hai?</li>
+    <li><strong>Q4.</strong> MongoDB mein connection pooling kyun zaroori hai?</li>
+    <li><strong>Q5.</strong> Mongoose Schema kya hota hai — ek example do?</li>
+    <li><strong>Q6.</strong> NextAuth mein JWT aur Session ka kya role hai?</li>
+    <li><strong>Q7.</strong> Password hashing kyun karte hain — bcrypt kaise kaam karta hai?</li>
+    <li><strong>Q8.</strong> Zustand aur Redux mein kya difference hai?</li>
+    <li><strong>Q9.</strong> React Query mein <code>queryKey</code> ka kya kaam hai?</li>
+    <li><strong>Q10.</strong> Razorpay payment flow ke 3 steps kya hain?</li>
+    <li><strong>Q11.</strong> REST API mein POST aur PUT ka difference?</li>
+    <li><strong>Q12.</strong> TypeScript kyun use kiya — JavaScript se better kaise?</li>
+    <li><strong>Q13.</strong> <code>.env</code> file mein kya store karte ho aur kyun?</li>
+    <li><strong>Q14.</strong> Cart data page refresh ke baad kaise save rehta hai?</li>
+    <li><strong>Q15.</strong> Seed route (<code>/api/products/seed</code>) ka kya kaam hai?</li>
+  </ul>
+</div>
+
+<!-- ══════════════ DAILY CHECKLIST ══════════════ -->
+<div class="section-title">✅ Daily Study Checklist</div>
+<div class="card">
+  <div class="checklist-item"><div class="checkbox"></div><span>Next.js App Router — Server vs Client Components samjhe</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>Dynamic routes aur API routes likhe</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>MongoDB Atlas pe connect kiya, Schema banaya</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>CRUD operations practice ki — find, create, update, delete</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>NextAuth setup samjha — Credentials Provider, JWT, Session</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>Bcrypt se password hash kiya aur verify kiya</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>Zustand store banaya — cart add/remove/total</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>React Query se API call ki — useQuery hook use kiya</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>Razorpay flow diagram samjha — order → pay → verify</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>REST API status codes yaad kiye</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>TypeScript interface likhi — Product, User, Order</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>ShadCN component use kiya project mein</span></div>
+  <div class="checklist-item"><div class="checkbox"></div><span>Saare 15 interview questions ke answers practice kiye</span></div>
+</div>
+
+<!-- ══════════════ TECH STACK SUMMARY ══════════════ -->
+<div class="section-title">🛠️ Complete Tech Stack — Quick Reference</div>
+<div class="card">
+  <table>
+    <tr><th>Category</th><th>Technology</th><th>Version</th><th>Use</th></tr>
+    <tr><td>Framework</td><td>Next.js</td><td>16.2.6</td><td>Full-stack React framework</td></tr>
+    <tr><td>UI Library</td><td>React</td><td>19.2.4</td><td>Component-based UI</td></tr>
+    <tr><td>Language</td><td>TypeScript</td><td>v5</td><td>Type safety</td></tr>
+    <tr><td>Database</td><td>MongoDB + Mongoose</td><td>v9.7</td><td>Data storage</td></tr>
+    <tr><td>Auth</td><td>NextAuth.js</td><td>v4</td><td>Authentication &amp; sessions</td></tr>
+    <tr><td>State</td><td>Zustand</td><td>v5</td><td>Global cart state</td></tr>
+    <tr><td>Data Fetch</td><td>TanStack Query</td><td>v5</td><td>Server state &amp; caching</td></tr>
+    <tr><td>Payment</td><td>Razorpay</td><td>v2.9</td><td>Payment processing</td></tr>
+    <tr><td>Styling</td><td>Tailwind CSS</td><td>v4</td><td>Utility-first CSS</td></tr>
+    <tr><td>UI Components</td><td>ShadCN + Radix UI</td><td>latest</td><td>Pre-built accessible components</td></tr>
+    <tr><td>Security</td><td>Bcryptjs</td><td>v3</td><td>Password hashing</td></tr>
+    <tr><td>Hosting DB</td><td>MongoDB Atlas</td><td>Cloud</td><td>Database hosting</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<div class="footer">
+  🌿 Plant Planet — Full-Stack E-Commerce Study Guide<br>
+  <small>Next.js · MongoDB · NextAuth · Zustand · React Query · Razorpay · TypeScript · Tailwind</small>
+</div>
+
+</body>
+</html>

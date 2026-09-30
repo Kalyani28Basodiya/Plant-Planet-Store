@@ -9,6 +9,7 @@ import { useProduct } from '@/lib/hooks/useProducts'
 
 export default function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
+  console.log(slug)
   const { data: product, isLoading } = useProduct(slug)
   const [quantity, setQuantity] = useState(1)
   const { data: session } = useSession()
